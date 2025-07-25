@@ -5,7 +5,12 @@ use core::panic;
 use rand::random;
 
 mod project_id78;
-use crate::project_id78::{alphabets, apply_to_jobs, is_even};
+use crate::{
+    project_id78::{alphabets, apply_to_jobs, is_even},
+    project_id96::{color_to_number, factorial},
+};
+
+mod project_id96;
 
 const THIS_IS_A_CONST: i32 = 5_000_000; // Equivalent to a macro in C (can be local or global, as in this case)
 
@@ -217,6 +222,20 @@ fn main() {
     while seconds > 0 {
         seconds -= 1;
     }
+
+    /* ========================================================================================== */
+
+    /* Project ID96 solutions */
+    println!("\nProject ID96 solutions:");
+    println!(
+        "Calling color_to_number with red: {}",
+        color_to_number("red")
+    );
+    println!(
+        "Calling color_to_number with purple: {}",
+        color_to_number("purple")
+    );
+    println!("Calling factorial with 5 (expected 120): {}", factorial(5));
 
     /* ========================================================================================== */
 
