@@ -9,7 +9,7 @@ const THIS_IS_A_CONST: i32 = 5_000_000; // Equivalent to a macro in C (can be lo
 fn main() {
     /* ========================================================================================== */
 
-    /* Data types and immutability  */
+    /* Data variables and mutability  */
     println!("Learning variables and mutability in Rust...");
 
     /* You can rename a type for convenience */
@@ -52,16 +52,10 @@ fn main() {
     /* The types usize and isize are defined based on the system architecture, if the processor for which the program will be compiled is 32-bit, then usize will be equivalent to a u32 type, the same for isize but signed */
     let x: usize = 45; // Eq. to u64 in this case
 
-    /* Tuples are data types which can contain multiple data types tied together */
-    let tuple = (10, 20.5, 'H');
-    let (_x, _y, _z) = tuple;
-    println!("tuple[0] = {}", tuple.0); // Access tuple elements with the . operator (first index is 0)
-    println!("tuple[1] = {}", tuple.1);
-    println!("tuple[2] = {}", tuple.2);
+    /* ========================================================================================== */
 
-    /* Arrays can contain a single data type */
-    let array: [u8; 5] = [1, 2, 3, 4, 5]; // You can specify type and size, else it will be inferred
-    println!("array[0] = {}", array[0]); // Access array elements with the [] notation
+    /* Data types  */
+    println!("\nLearning data types in Rust...");
 
     /* Strings */
 
@@ -74,6 +68,53 @@ fn main() {
     println!("{}", mut_string);
     mut_string += " Growing...";
     println!("{}", mut_string);
+
+    /* Methods on data types */
+    let x: i32 = -55;
+    println!("abs(x) = {}", x.abs());
+    println!("x^2 = {}", x.pow(2));
+    let x = "  Hello, World!   ";
+    println!("Trimmed string: {}", x.trim());
+    let x: f64 = 3.44467;
+    println!("ceil(x) = {}", x.ceil());
+    println!("floor(x) = {}", x.floor());
+    println!("Formatted float x = {:.2}", x); // Print with only 2 decimal places
+
+    /* Casting. In C, for example, you would cast an uint16_t as an uint8_t by using (uint8_t)x. In Rust you use the as keyword */
+    let x: f64 = 16.465;
+    let y: u8 = x as u8; // Now y = 16
+    println!("Casted x, y = {y}");
+
+    /* Booleans */
+    let x: bool = 2 == 2;
+    println!("x = {}, not x = {}", x, !x);
+    println!("x & !x = {}", x && !x); // Evals. to false
+
+    /* Character type */
+    let x: char = 'B';
+    let y: char = '🔌';
+    println!(
+        "x = {}, is alphabetic? {}, is uppercase? {}, y = {}, is alphabetic? {}",
+        x,
+        x.is_alphabetic(),
+        x.is_uppercase(),
+        y,
+        y.is_alphabetic()
+    );
+
+    /* Arrays can contain a single data type. Arrays have fixed size (cannot grow) */
+    let array: [u8; 5] = [1, 2, 3, 4, 5]; // You can specify type and size, else it will be inferred
+    println!("array[0] = {}", array[0]); // Access array elements with the [] notation
+    let array = [6, 7, 8, 9, 10, 11, 12]; // It is not necessary to indicate the type or size
+    const ARRAY_SIZE: usize = 32;
+    let array: [u16; ARRAY_SIZE] = [0; ARRAY_SIZE]; // You may initialize all the elements to 0
+
+    /* Tuples are data types which can contain multiple data types tied together */
+    let tuple = (10, 20.5, 'H');
+    let (_x, _y, _z) = tuple;
+    println!("tuple[0] = {}", tuple.0); // Access tuple elements with the . operator (first index is 0)
+    println!("tuple[1] = {}", tuple.1);
+    println!("tuple[2] = {}", tuple.2);
 
     /* ========================================================================================== */
 
@@ -441,10 +482,10 @@ fn main() {
 
     /* Vectors. All its elements must be of the same type. */
 
-    let mut v: Vec<u8> = Vec::new();
-    v = vec![1, 2, 3]; // Use the vec! macro for initializing the vector.
-    v.push(4);
-    for element in v {
-        println!("element = {}", element);
-    }
+    // let mut v: Vec<u8> = Vec::new();
+    // v = vec![1, 2, 3]; // Use the vec! macro for initializing the vector.
+    // v.push(4);
+    // for element in v {
+    //     println!("element = {}", element);
+    // }
 }
