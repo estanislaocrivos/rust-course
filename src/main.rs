@@ -1,4 +1,7 @@
-#![allow(dead_code)] // Avoid warnings for now
+#![allow(dead_code)]
+#![allow(unused_variables)]
+
+use core::panic;
 use rand::random;
 
 const THIS_IS_A_CONST: i32 = 5_000_000; // Equivalent to a macro in C (can be local or global, as in this case)
@@ -7,31 +10,49 @@ fn main() {
     /* ========================================================================================== */
 
     /* Data types and immutability  */
+    println!("Learning variables and mutability in Rust...");
 
-    let random_number: u8 = random();
+    /* You can rename a type for convenience */
+    type Meters = i32;
+    let distance: Meters = 50; // This may be more convenient sometimes
+
+    /* Immutable variables won't let you change their value once created and assigned one  */
+    let random_number: u8 = random(); // This is an immutable variable
     println!("Hello, world! The random number is {}.", random_number);
+    println!("I can also do this: {random_number}, to print the random_number variable value");
+    println!("You can also re-print a value like this {0}, {0}, without having to add two random_number at the end", random_number);
 
-    /* This immut_var is immutable, so its value cannot be changed after it was created and assigned for the first time. */
+    // random_number = 10; // This will throw an error
 
-    let immut_var: u16 = 9;
-    println!("immut_var = {}", immut_var);
-
-    // immut_var = 10; // This will throw an error
-
-    /* This mut_var can be mutable so its value can be changed any time. */
-
+    /* Mutable variables values can be changed any time */
     let mut mut_var: u8 = 255;
-    println!("mut_var = {}", mut_var);
-
+    println!("mut_var = {} at creation", mut_var);
     mut_var = 0;
-    println!("mut_var = {}", mut_var);
+    println!("mut_var = {} after modification", mut_var);
 
-    /* By default rust assumes that all integers are i32, and all floats are f64, unless we specify each type (preferrable on embedded targets). */
-
+    /* Rust allows the definition of consts, which are like macros in C. By def. their value cannot be changed and they could be defined inside a scope or globally */
     println!("THIS_IS_A_CONST = {}", THIS_IS_A_CONST);
 
-    /* Tuples can contain multiple data types */
+    /* By default rust assumes that all integers are i32, and all floats are f64, unless we specify each type (preferrable on embedded programming due to the different chip architectures and variables size) */
+    let uint8_t_var: u8 = 255;
+    println!(
+        "Unsigned integers of 8 bits can only hold up to (2^8 - 1) = {}",
+        uint8_t_var
+    );
 
+    /* Rust allows variable shadowing, which means that a variable can be re-created even after it was first created, even with different types */
+    let x: i32 = 55;
+    println!("x = {x}");
+    let x: u8 = 5;
+    println!("Shadowed x = {}", x);
+
+    /* Large numbers can use _ as visual separators to clarify the multiple of 1000s positions */
+    let x = 1_000_000; // One million
+
+    /* The types usize and isize are defined based on the system architecture, if the processor for which the program will be compiled is 32-bit, then usize will be equivalent to a u32 type, the same for isize but signed */
+    let x: usize = 45; // Eq. to u64 in this case
+
+    /* Tuples are data types which can contain multiple data types tied together */
     let tuple = (10, 20.5, 'H');
     let (_x, _y, _z) = tuple;
     println!("tuple[0] = {}", tuple.0); // Access tuple elements with the . operator (first index is 0)
@@ -39,18 +60,18 @@ fn main() {
     println!("tuple[2] = {}", tuple.2);
 
     /* Arrays can contain a single data type */
-
     let array: [u8; 5] = [1, 2, 3, 4, 5]; // You can specify type and size, else it will be inferred
     println!("array[0] = {}", array[0]); // Access array elements with the [] notation
 
     /* Strings */
 
+    // Static (immutable)
     let immut_string: &'static str = "Hello, world!"; // This is a static string, it is allocated on read-only memory (flash) and embedded on the binary file. Cannot be modified
     println!("{}", immut_string);
 
+    // Dynamic (mutable)
     let mut mut_string: String = "This string could grow...".to_string(); // This is a heap-allocated string, so it could grow. New memory will be allocated on the heap for storing new characters.
     println!("{}", mut_string);
-
     mut_string += " Growing...";
     println!("{}", mut_string);
 
@@ -372,7 +393,7 @@ fn main() {
     /* Let-else block */
     println!("\nLearning let-else in Rust...");
 
-    let some_var: Option<u8> = Some(10);
+    let mut some_var: Option<u8> = Some(10);
 
     /* To "decode" an optional, you may use the already-known match{} structure: */
     match some_var {
@@ -392,4 +413,38 @@ fn main() {
     println!("The number is {}", number);
 
     /* ========================================================================================== */
+
+    /* Labeled blocks */
+    println!("\nLearning labeled blocks in Rust...");
+
+    some_var = Some(0);
+    'first_block: {
+        let Some(mut number) = some_var else {
+            break 'first_block;
+        };
+        for index in 0..10 {
+            number += 1;
+            println!("number = {}", number);
+            if index > 5 {
+                println!("Exiting 'first_block");
+                break 'first_block;
+            }
+        }
+    }
+
+    /* ========================================================================================== */
+
+    /* Collections */
+    println!("\nLearning collections in Rust...");
+
+    /* Collections are types of data which allow to change size during program execution */
+
+    /* Vectors. All its elements must be of the same type. */
+
+    let mut v: Vec<u8> = Vec::new();
+    v = vec![1, 2, 3]; // Use the vec! macro for initializing the vector.
+    v.push(4);
+    for element in v {
+        println!("element = {}", element);
+    }
 }
