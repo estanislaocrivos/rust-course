@@ -4,6 +4,9 @@
 use core::panic;
 use rand::random;
 
+mod project_id78;
+use crate::project_id78::{alphabets, apply_to_jobs, is_even};
+
 const THIS_IS_A_CONST: i32 = 5_000_000; // Equivalent to a macro in C (can be local or global, as in this case)
 
 fn main() {
@@ -136,6 +139,83 @@ fn main() {
 
     for element in array {
         println!("element = {}", element);
+    }
+
+    /* The unit type. This is what a function will return if there is nothing to be returned: */
+    let unit_type = ();
+
+    /* For example, this function will return a unit type: */
+    fn mystery_function() {}
+    println!("Call to mystery_function = {:?}", mystery_function());
+
+    /* Blocks in functions. Blocks allows to achieve isolation, without needing to define a new function. All the variables which are created inside the block are not accesible after the block. */
+
+    let calculation = {
+        println!("I can access the array, defined before: {:?}", array);
+        45 + 45
+    };
+    println!("calculation = {}", calculation);
+
+    /* ========================================================================================== */
+
+    /* Project ID78 solutions */
+    println!("\nProject ID78 solutions:");
+    apply_to_jobs(32, "Rust developer".to_string());
+    println!(
+        "Calling is_even with 9: {}, calling is_even with 8: {}",
+        is_even(9),
+        is_even(8)
+    );
+    println!(
+        "Calling alphabets with aardvark: {:?}",
+        alphabets("aardvark")
+    );
+    println!("Calling alphabets with zoology: {:?}", alphabets("zoology"));
+    println!("Calling alphabets with zebra: {:?}", alphabets("zebra"));
+
+    /* ========================================================================================== */
+
+    /* Control flows */
+    println!("\nLearning control flows in Rust...");
+
+    /* if-else structures will be ignored (already used) */
+
+    /* Match structures are kind of switch-case in C. Matches let you match the result of an expression, and act upon */
+    let evaluation: bool = true;
+    match evaluation {
+        true => println!("evaluation is true!"),
+        false => println!("evaluation is false!"),
+    }
+
+    /* You can also assign the result of the match statement */
+    let result = match evaluation {
+        true => println!("evaluation is true!"),
+        false => println!("evaluation is false!"),
+    };
+
+    /* And you can match multiple values: */
+    let number = 5;
+    match number {
+        4 | 5 | 6 => println!("Number is 4, 5 or 6!"),
+        _ => println!("Number has any other value!"), // You use _ for default cases or any uncovered cases
+    }
+
+    /* Loops */
+
+    let mut seconds = 60;
+    loop {
+        seconds -= 1;
+        if seconds == 0 {
+            break;
+        }
+        continue; // Continue forces to go back to loop()
+                  // The program never reaches here...
+    }
+
+    /* This loop has the same behaviour as the previous one */
+    seconds = 60;
+    while seconds > 0 {
+        seconds -= 1;
     }
 
     /* ========================================================================================== */
