@@ -4,13 +4,14 @@
 use core::panic;
 use rand::random;
 
+mod project_id117;
 mod project_id78;
+mod project_id96;
 use crate::{
+    project_id117::{eat_meal, eat_meal_ref},
     project_id78::{alphabets, apply_to_jobs, is_even},
     project_id96::{color_to_number, factorial},
 };
-
-mod project_id96;
 
 const THIS_IS_A_CONST: i32 = 5_000_000; // Equivalent to a macro in C (can be local or global, as in this case)
 
@@ -154,6 +155,7 @@ fn main() {
 
     /* Project ID78 solutions */
     println!("\nProject ID78 solutions:");
+
     apply_to_jobs(32, "Rust developer".to_string());
     println!(
         "Calling is_even with 9: {}, calling is_even with 8: {}",
@@ -214,8 +216,9 @@ fn main() {
 
     /* ========================================================================================== */
 
-    /* Project ID96 solutions */
+    /* Project ID96 */
     println!("\nProject ID96 solutions:");
+
     println!(
         "Calling color_to_number with red: {}",
         color_to_number("red")
@@ -321,13 +324,54 @@ fn main() {
     let static_string_ref = static_string; // This variable also refers to the same string which is stored in flash (embedded in the binary file)
 
     let number = 4;
-    print_number(number); // A copy of the variable number is passed to the function, because integers do implement the copy trait
-
     fn print_number(number: i32) {
         println!("Number is {number}...");
     }
-
+    print_number(number); // A copy of the variable number is passed to the function, because integers do implement the copy trait
     println!("I can still use the variable number here: {number}");
+
+    let string: String = "Hello!".to_string();
+    fn print_string(string: String) {
+        println!("By passing a String to a function, the function takes ownership of it: {string}");
+    }
+    print_string(string);
+    println!("Here, string does not exist anymore :(");
+
+    let string: String = "Hello!".to_string();
+    fn print_string_and_return(string: String) -> String {
+        println!("By passing a String to a function, the function takes ownership of it: {string}, but this time this function will return it...");
+        return string;
+    }
+    let string = print_string_and_return(string);
+    println!("Here, the string exists because the function returned the ownership: {string}");
+
+    let string: String = "Hello!".to_string();
+    fn print_string_from_ref(string_ref: &String) {
+        println!("Here, the function takes a reference to the string, so it can still live after this call: {string_ref}");
+    }
+    print_string_from_ref(&string);
+    println!("I can still use the string after the call: {string}");
+
+    let mut string: String = "Burger and ".to_string();
+    println!("Original string: {string}");
+    fn add_food(original: &mut String, added: &str) {
+        original.push_str(added);
+    }
+    add_food(&mut string, "fries...");
+    println!("Modified string: {string}");
+
+    /* ========================================================================================== */
+
+    /* Project ID117 solutions */
+    println!("\nProject ID117 solutions:");
+
+    let meal: String = "Sushi".to_string();
+    println!("Was the meal eaten? If empty: {}, yes...", eat_meal(meal));
+
+    /* Using a mutable reference */
+    let mut meal: String = "Sushi".to_string();
+    eat_meal_ref(&mut meal);
+    println!("Was the meal eaten? If empty: {meal}, yes...");
 
     /* ========================================================================================== */
 

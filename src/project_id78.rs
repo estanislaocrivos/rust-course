@@ -1,5 +1,3 @@
-// src/project_id78.rs
-
 /* This project corresponds to task number 78 @ course https://www.udemy.com/course/learn-to-code-with-rust/ */
 
 /*
