@@ -643,14 +643,4 @@ fn main() {
     }
 
     /* ========================================================================================== */
-
-    /* Collections */
-    println!("\nLearning collections in Rust...");
-
-    /* Collections are types of data which allow to change size during program execution */
-
-    /* ========================================================================================== */
-
-    /* Collections */
-    println!("\nLearning collections in Rust...");
 }
