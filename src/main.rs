@@ -65,18 +65,6 @@ fn main() {
     /* Data types  */
     println!("\nLearning data types in Rust...");
 
-    /* Strings */
-
-    // Static (immutable)
-    let immut_string: &'static str = "Hello, world!"; // This is a static string, it is allocated on read-only memory (flash) and embedded on the binary file. Cannot be modified
-    println!("{}", immut_string);
-
-    // Dynamic (mutable)
-    let mut mut_string: String = "This string could grow...".to_string(); // This is a heap-allocated string, so it could grow. New memory will be allocated on the heap for storing new characters.
-    println!("{}", mut_string);
-    mut_string += " Growing...";
-    println!("{}", mut_string);
-
     /* Methods on data types */
     let x: i32 = -55;
     println!("abs(x) = {}", x.abs());
@@ -119,6 +107,7 @@ fn main() {
 
     /* Debug trait. Every time we print something in the console using {} and then calling the variable to be printed, Rust first checks if the variable to be printed implements the display trait. A trait is an interface which must be implemented by the data type. In this case the Display trait allows a data type to be printed on the console. For example, arrays do not implement the Display trait, so we cannot to this: */
     // println!("The array is {}", array);
+
     /* For cases like this we can use the debug trait, which Rust offers to be able to print data types with little effort. We can invoke this trait by using :? inside the print macro:  */
     println!("The array is {:?}", array);
 
@@ -280,6 +269,65 @@ fn main() {
 
     text += " Can be modified after function call.";
     println!("The text can be still used after function call: {}", text);
+
+    /* ========================================================================================== */
+
+    /* Strings */
+    println!("\nLearning strings in Rust...");
+
+    // Static (immutable)
+    let immut_string: &'static str = "Hello, world!"; // This is a static string, it is allocated on read-only memory (flash) and embedded on the binary file. Cannot be modified
+    println!("{}", immut_string);
+
+    // Dynamic (mutable)
+    let mut mut_string: String = "This string could grow...".to_string(); // This is a heap-allocated string, so it could grow. New memory will be allocated on the heap for storing new characters. In this case the variable mut_string is stored in the stack, this variable holds a reference to a point in the heap where the string is allocated and its size
+    println!("{}", mut_string);
+    mut_string.push_str(" Growing...");
+    println!("Mutated string: {}", mut_string);
+
+    let string = "Hello, world!";
+    let string: String = "Goodbye, world!".to_string();
+
+    /* ========================================================================================== */
+
+    /* Ownership */
+    println!("\nLearning ownership in Rust...");
+
+    let time = 2025;
+    let year = time; // This generates a copy of the variable time, so now there are two vars. on the stack (time, year) with the value 2025. This is because these types of vars. implement the copy trait (integers, floats, bools, etc.)
+    println!("The time is {time}, and the year is {year}");
+
+    let another_string = string; // Strings do not implement the copy trait, so doing this will not generate a copy of the string. There will be still only one string in the heap, and now the 'string' variable looses ownership of the original string. MOVES OWNERSHIP.
+
+    drop(another_string); // This drops the memory allocated by the variable, making the variable no longer usable
+
+    let mut string: String = "Goodbye, world!".to_string();
+    let another_string = string.clone(); // Now there are two strings on the heap, each one with its owner
+    println!("The clone method allows to generate a copy of the heap-allocated string: {string}, {another_string}");
+
+    /* References */
+
+    let mut value = 5;
+    println!("value = {value}");
+    let value_reference = &mut value;
+    *value_reference += 1;
+    println!("value + 1 (modified by reference) = {value}");
+
+    let string_reference = &mut string;
+    string_reference.push_str(" Adding string to string...");
+    println!("String 'string' after modification by reference: {string}");
+
+    let static_string = "Hello"; // This variable is of type &str because static_string is a reference to the point in static memory where the string is located
+    let static_string_ref = static_string; // This variable also refers to the same string which is stored in flash (embedded in the binary file)
+
+    let number = 4;
+    print_number(number); // A copy of the variable number is passed to the function, because integers do implement the copy trait
+
+    fn print_number(number: i32) {
+        println!("Number is {number}...");
+    }
+
+    println!("I can still use the variable number here: {number}");
 
     /* ========================================================================================== */
 
@@ -601,12 +649,8 @@ fn main() {
 
     /* Collections are types of data which allow to change size during program execution */
 
-    /* Vectors. All its elements must be of the same type. */
+    /* ========================================================================================== */
 
-    // let mut v: Vec<u8> = Vec::new();
-    // v = vec![1, 2, 3]; // Use the vec! macro for initializing the vector.
-    // v.push(4);
-    // for element in v {
-    //     println!("element = {}", element);
-    // }
+    /* Collections */
+    println!("\nLearning collections in Rust...");
 }
