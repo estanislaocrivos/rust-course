@@ -472,6 +472,7 @@ fn main() {
             size_ml: i32,
         ) -> Coffee {
             return Coffee {
+                // Automatic assignment due to match between function params. and struct members
                 coffee_type,
                 is_cold,
                 has_milk,
@@ -570,7 +571,7 @@ fn main() {
             age,
             email,
             active: true,
-        }; // Rust can automatically detect the name-match between the struct fields and the function parameters and assign them directly. Else, you can do typical assignment.
+        };
     }
 
     let new_user = new_user(
@@ -579,7 +580,6 @@ fn main() {
         55,
         "johndoe@gmail.com".to_string(),
     );
-
     println!(
         "new_user info: name = {}, surname = {}",
         new_user.name, new_user.surname
@@ -589,21 +589,20 @@ fn main() {
         name: "Anna".to_string(),
         ..user // This tells Rust to fill the rest of unassigned parameters with the contents of the user struct.
     };
-
     println!(
         "another_user info: name = {}, age = {}",
         another_user.name, another_user.age
     );
 
-    /* You can implement methods for a structure, like classes in OOP */
+    /* Tuple structs: this kind of structs allow to hold multiple parameters but in a tuple-like style, with no "tags" associated to each element. This allows to implement type-specific tuples, unlike generic tuples */
 
-    impl User {
-        fn read_age(&self) {
-            println!("The user age is: {}", self.age);
-        }
-    }
+    struct ShortDuration(u32, u32); // Hours, minutes
+    struct LongDuration(u32, u32); // Years, months
 
-    new_user.read_age(); // Access methods with the . operator
+    let some_time = ShortDuration(4, 5);
+    println!("some_time, h: {}, m: {}", some_time.0, some_time.1);
+
+    // let some_time = (4, 5); // This is a common touple and does not have a specific type, unlike a struct tuple
 
     /* ========================================================================================== */
 
