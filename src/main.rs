@@ -6,11 +6,13 @@ use rand::random;
 
 mod project_id117;
 mod project_id127;
+mod project_id140;
 mod project_id78;
 mod project_id96;
 use crate::{
     project_id117::{eat_meal, eat_meal_ref},
-    project_id127::{start_trip, visit_boston, visit_new_york, visit_philadelphia},
+    project_id127::project_id127_solution,
+    project_id140::project_id140_solution,
     project_id78::{alphabets, apply_to_jobs, is_even},
     project_id96::{color_to_number, factorial},
 };
@@ -379,14 +381,7 @@ fn main() {
 
     /* Project ID127 solutions */
     println!("\nProject ID127 solutions:");
-
-    let mut trip: String = start_trip();
-    visit_philadelphia(&mut trip);
-    trip.push_str(" and ");
-    visit_new_york(&mut trip);
-    trip.push_str(" and ");
-    visit_boston(&mut trip);
-    println!("{trip}");
+    project_id127_solution();
 
     /* ========================================================================================== */
 
@@ -428,6 +423,12 @@ fn main() {
     let mut_array_slice: &mut [i32] = &mut array[..3];
     mut_array_slice[0] = 20; // Modify array using the mutable reference to the slice
     println!("Here, the value of array[0] is {}", array[0]);
+
+    /* ========================================================================================== */
+
+    /* Project ID140 solutions */
+    println!("\nProject ID140 solutions:");
+    project_id140_solution();
 
     /* ========================================================================================== */
 

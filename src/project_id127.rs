@@ -37,20 +37,30 @@ Invoke `show_itinerary`. The final output should be:
 "The plan is...Philadelphia and New York and Boston."
 */
 
-pub fn start_trip() -> String {
+pub fn project_id127_solution() {
+    let mut trip: String = start_trip();
+    visit_philadelphia(&mut trip);
+    trip.push_str(" and ");
+    visit_new_york(&mut trip);
+    trip.push_str(" and ");
+    visit_boston(&mut trip);
+    println!("{trip}");
+}
+
+fn start_trip() -> String {
     let string = "The plan is... ".to_string();
     return string;
 }
 
 /* Modify the original string by using mutable references to it */
-pub fn visit_philadelphia(string: &mut String) {
+fn visit_philadelphia(string: &mut String) {
     string.push_str("Philadelphia");
 }
 
-pub fn visit_new_york(string: &mut String) {
+fn visit_new_york(string: &mut String) {
     string.push_str("New York");
 }
 
-pub fn visit_boston(string: &mut String) {
+fn visit_boston(string: &mut String) {
     string.push_str("Boston");
 }
