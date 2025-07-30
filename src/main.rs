@@ -405,6 +405,141 @@ fn main() {
     /* Structs */
     println!("\nLearning structs in Rust...");
 
+    #[derive(Debug)] // This allows us to use the debug prints on structures
+    struct Coffee {
+        coffee_type: String,
+        is_cold: bool,
+        has_milk: bool,
+        size_ml: i32,
+    }
+
+    const DEFAULT_COFFEE_TYPE: &str = "moka";
+    const DEFAULT_COFFEE_SIZE_ML: i32 = 50;
+
+    /* Methods on Coffee class */
+    impl Coffee {
+        /*
+        If the method to be implemented needs to access the structure (mut or immut) the first parameter must be self. Available options are:
+
+        - self (immutable, by parameter)
+        - mut self (mutable, by parameter)
+        - &self (immutable reference)
+        - &mut self (mutable reference)
+
+        The last two are the most used because in both cases you end up implicitly passing a reference to the object so there is no change in ownership.
+
+        If a method does not take self as parameter, the function is referred to as an associated function, which are usually used for constructors/factories, etc. (the new() function below is an example of an associated function).
+        */
+
+        fn new() -> Coffee {
+            // This can be thought as the object constructor
+            return Coffee {
+                coffee_type: DEFAULT_COFFEE_TYPE.to_string(),
+                is_cold: false,
+                has_milk: false,
+                size_ml: DEFAULT_COFFEE_SIZE_ML,
+            };
+        }
+
+        fn print_type(&self) {
+            // We could use Coffee instead of Self, it is the same (Rust knows Self is Coffee because this is an implementation block for Coffee)
+            println!("Coffee type: {}", self.coffee_type);
+        }
+
+        fn print_size(&self) {
+            println!("Coffee size: {} ml", self.size_ml);
+            self.print_type(); // You can also call other implemented methods from within a method
+        }
+
+        fn hot_to_cold(&mut self) {
+            self.is_cold = true;
+        }
+
+        fn is_better_than(&self, other_coffee: &Coffee) {
+            println!(
+                "Coffee of type {} is better than the other coffee of type {}",
+                self.coffee_type, other_coffee.coffee_type
+            );
+        }
+    }
+
+    /* Rust allows to have multiple implementation blocks for the same "class". It will automatically merge all the implementations blocks in one on compile time */
+    impl Coffee {
+        fn new_with_params(
+            coffee_type: String,
+            is_cold: bool,
+            has_milk: bool,
+            size_ml: i32,
+        ) -> Coffee {
+            return Coffee {
+                coffee_type,
+                is_cold,
+                has_milk,
+                size_ml,
+            };
+        }
+    }
+
+    let coffee = Coffee {
+        // You can create a new object "by hand"
+        coffee_type: "espresso".to_string(),
+        is_cold: false,
+        has_milk: false,
+        size_ml: 32,
+    };
+
+    println!("The coffee object is: {:?}", coffee); // This is allowed thanks to the derived Debug trait
+
+    let coffee = Coffee::new(); // Or using the implementation of the constructor (new() method)
+
+    let mut coffee = Coffee::new_with_params("moka".to_string(), false, false, 20); // Or using the other constructor implementation
+
+    // let coffee_type = coffee.coffee_type; // Moving ownership, be careful!
+
+    println!("Is the coffee cold? {}", coffee.is_cold);
+    coffee.hot_to_cold();
+    println!("Now, is the coffee cold? {}", coffee.is_cold);
+
+    fn modify_coffee_type(mut coffee: Coffee, new_type: &str) -> Coffee {
+        coffee.coffee_type = new_type.to_string();
+        return coffee;
+    }
+
+    fn modify_coffee_type_by_ref(coffee: &mut Coffee, new_type: &str) {
+        coffee.coffee_type = new_type.to_string();
+    }
+
+    println!("The coffee type is: {}", coffee.coffee_type);
+    coffee = modify_coffee_type(coffee, "new coffee type, by parameter");
+    println!("The coffee type is: {}", coffee.coffee_type);
+    modify_coffee_type_by_ref(&mut coffee, "another coffee type, by reference");
+    println!("The coffee type is: {}", coffee.coffee_type);
+
+    coffee.print_size();
+
+    let mut coffee_1 = Coffee::new();
+    coffee_1.coffee_type = "moka".to_string();
+    let mut coffee_2 = Coffee::new();
+    coffee_2.coffee_type = "latte".to_string();
+    coffee_1.is_better_than(&coffee_2);
+
+    /* Builder pattern: returning a mutable ref. to self from the object's methods allow chaining actions. Example below */
+
+    impl Coffee {
+        fn change_size(&mut self, size: i32) -> &mut Self {
+            self.size_ml = size;
+            return self;
+        }
+        fn add_milk(&mut self) -> &mut Self {
+            self.has_milk = true;
+            return self;
+        }
+    }
+
+    coffee.change_size(100).add_milk(); // You can chain methods
+
+    /* Another example */
+
     struct User {
         name: String,
         surname: String,
