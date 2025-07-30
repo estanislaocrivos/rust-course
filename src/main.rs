@@ -5,10 +5,12 @@ use core::panic;
 use rand::random;
 
 mod project_id117;
+mod project_id127;
 mod project_id78;
 mod project_id96;
 use crate::{
     project_id117::{eat_meal, eat_meal_ref},
+    project_id127::{start_trip, visit_boston, visit_new_york, visit_philadelphia},
     project_id78::{alphabets, apply_to_jobs, is_even},
     project_id96::{color_to_number, factorial},
 };
@@ -372,6 +374,60 @@ fn main() {
     let mut meal: String = "Sushi".to_string();
     eat_meal_ref(&mut meal);
     println!("Was the meal eaten? If empty: {meal}, yes...");
+
+    /* ========================================================================================== */
+
+    /* Project ID127 solutions */
+    println!("\nProject ID127 solutions:");
+
+    let mut trip: String = start_trip();
+    visit_philadelphia(&mut trip);
+    trip.push_str(" and ");
+    visit_new_york(&mut trip);
+    trip.push_str(" and ");
+    visit_boston(&mut trip);
+    println!("{trip}");
+
+    /* ========================================================================================== */
+
+    /* Slices */
+    println!("\nLearning slices in Rust...");
+
+    /* Slices are portions of data structures such as strings or arrays */
+
+    let string = "John Appleseed".to_string();
+    let name = &string[..4]; // Here the name variable is now a reference to the first 4 bytes (from 0 to 3) of the string. Bytes, not characters (in some cases 1 byte != 1 char), although in this case it does match
+    let surname = &string[4..];
+    println!("Name: {name}");
+    println!("Surname: {surname}");
+
+    /* Using the type &str as parameters in functions allows to pass not only fixed strings but also slices and REFS. to heap-allocated strings. This is more versatile: */
+    fn print_something(string: &str) {
+        println!("Something: {string}");
+    }
+    print_something(&"Hello! As a heap-allocated string".to_string()); // Here I pass a reference to a heap-allocated string, this is valid
+    print_something("Hello! As a static string"); // I can also pass a static string
+    let string = "Hello, cut this!";
+    print_something(&string[..5]); // And also a slice (ref. to a string)
+
+    /* You may also "slice" an array */
+
+    let mut array = [0, 1, 2, 3, 4, 5];
+    let array_slice = &array[..3];
+
+    fn print_array(array_slice: &[i32]) {
+        // You may not define the size of the slice, this allows for more generic function parameters
+        println!("Array: {:?}", array_slice);
+    }
+    print_array(&array);
+    print_array(&array_slice);
+
+    /* Mutability on slices: Rust does not allow mutable string slices, but it does allow mutable array slices */
+
+    println!("Here, the value of array[0] is {}", array[0]);
+    let mut_array_slice: &mut [i32] = &mut array[..3];
+    mut_array_slice[0] = 20; // Modify array using the mutable reference to the slice
+    println!("Here, the value of array[0] is {}", array[0]);
 
     /* ========================================================================================== */
 
