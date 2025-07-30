@@ -36,12 +36,22 @@ called. How can we continue to have access to the String in
 the `main` function? Print out the (empty) String.
 */
 
-pub fn eat_meal(mut meal: String) -> String {
+pub fn project_id117_solution() {
+    let meal: String = "Sushi".to_string();
+    println!("Was the meal eaten? If empty: {}, yes...", eat_meal(meal));
+
+    /* Using a mutable reference */
+    let mut meal: String = "Sushi".to_string();
+    eat_meal_ref(&mut meal);
+    println!("Was the meal eaten? If empty: {meal}, yes...");
+}
+
+fn eat_meal(mut meal: String) -> String {
     meal.clear();
     return meal;
 }
 
 /* Using references */
-pub fn eat_meal_ref(meal: &mut String) {
+fn eat_meal_ref(meal: &mut String) {
     meal.clear();
 }

@@ -10,7 +10,7 @@ mod project_id140;
 mod project_id78;
 mod project_id96;
 use crate::{
-    project_id117::{eat_meal, eat_meal_ref},
+    project_id117::project_id117_solution,
     project_id127::project_id127_solution,
     project_id140::project_id140_solution,
     project_id78::{alphabets, apply_to_jobs, is_even},
@@ -368,14 +368,7 @@ fn main() {
 
     /* Project ID117 solutions */
     println!("\nProject ID117 solutions:");
-
-    let meal: String = "Sushi".to_string();
-    println!("Was the meal eaten? If empty: {}, yes...", eat_meal(meal));
-
-    /* Using a mutable reference */
-    let mut meal: String = "Sushi".to_string();
-    eat_meal_ref(&mut meal);
-    println!("Was the meal eaten? If empty: {meal}, yes...");
+    project_id117_solution();
 
     /* ========================================================================================== */
 
