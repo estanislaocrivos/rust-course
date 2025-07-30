@@ -10,11 +10,9 @@ mod project_id140;
 mod project_id78;
 mod project_id96;
 use crate::{
-    project_id117::project_id117_solution,
-    project_id127::project_id127_solution,
-    project_id140::project_id140_solution,
-    project_id78::{alphabets, apply_to_jobs, is_even},
-    project_id96::{color_to_number, factorial},
+    project_id117::project_id117_solution, project_id127::project_id127_solution,
+    project_id140::project_id140_solution, project_id78::project_id78_solution,
+    project_id96::project_id96_solution,
 };
 
 const THIS_IS_A_CONST: i32 = 5_000_000; // Equivalent to a macro in C (can be local or global, as in this case)
@@ -159,19 +157,7 @@ fn main() {
 
     /* Project ID78 solutions */
     println!("\nProject ID78 solutions:");
-
-    apply_to_jobs(32, "Rust developer".to_string());
-    println!(
-        "Calling is_even with 9: {}, calling is_even with 8: {}",
-        is_even(9),
-        is_even(8)
-    );
-    println!(
-        "Calling alphabets with aardvark: {:?}",
-        alphabets("aardvark")
-    );
-    println!("Calling alphabets with zoology: {:?}", alphabets("zoology"));
-    println!("Calling alphabets with zebra: {:?}", alphabets("zebra"));
+    project_id78_solution();
 
     /* ========================================================================================== */
 
@@ -222,16 +208,7 @@ fn main() {
 
     /* Project ID96 */
     println!("\nProject ID96 solutions:");
-
-    println!(
-        "Calling color_to_number with red: {}",
-        color_to_number("red")
-    );
-    println!(
-        "Calling color_to_number with purple: {}",
-        color_to_number("purple")
-    );
-    println!("Calling factorial with 5 (expected 120): {}", factorial(5));
+    project_id96_solution();
 
     /* ========================================================================================== */
 

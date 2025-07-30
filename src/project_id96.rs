@@ -30,7 +30,19 @@ The first solution should not use recursion.
 The second solution should use recursion.
 */
 
-pub fn color_to_number(string: &str) -> u8 {
+pub fn project_id96_solution() {
+    println!(
+        "Calling color_to_number with red: {}",
+        color_to_number("red")
+    );
+    println!(
+        "Calling color_to_number with purple: {}",
+        color_to_number("purple")
+    );
+    println!("Calling factorial with 5 (expected 120): {}", factorial(5));
+}
+
+fn color_to_number(string: &str) -> u8 {
     match string {
         "red" => 1,
         "green" => 2,
@@ -39,7 +51,7 @@ pub fn color_to_number(string: &str) -> u8 {
     }
 }
 
-pub fn factorial(number: u32) -> u32 {
+fn factorial(number: u32) -> u32 {
     let mut factorial: u32 = number;
     let mut current: u32 = number;
     while current > 1 {

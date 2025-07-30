@@ -33,15 +33,30 @@ println!("{:?}", alphabets("zoology"));  -> (false, true)
 println!("{:?}", alphabets("zebra"));    -> (true, true)
 */
 
-pub fn apply_to_jobs(number: i32, title: String) {
+pub fn project_id78_solution() {
+    apply_to_jobs(32, "Rust developer".to_string());
+    println!(
+        "Calling is_even with 9: {}, calling is_even with 8: {}",
+        is_even(9),
+        is_even(8)
+    );
+    println!(
+        "Calling alphabets with aardvark: {:?}",
+        alphabets("aardvark")
+    );
+    println!("Calling alphabets with zoology: {:?}", alphabets("zoology"));
+    println!("Calling alphabets with zebra: {:?}", alphabets("zebra"));
+}
+
+fn apply_to_jobs(number: i32, title: String) {
     println!("I am applying to {} {} jobs!", number, title);
 }
 
-pub fn is_even(number: i32) -> bool {
+fn is_even(number: i32) -> bool {
     number % 2 == 0
 }
 
-pub fn alphabets(string: &str) -> (bool, bool) {
+fn alphabets(string: &str) -> (bool, bool) {
     let first_bool: bool = string.contains('a');
     let second_bool: bool = string.contains('z');
     (first_bool, second_bool)
