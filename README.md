@@ -1,6 +1,13 @@
-# Rust Fundamentals Course @ [Udemy](https://www.udemy.com/curso-completo-rust)
+# Rust Fundamentals Course Notes and Resources
 
-## Annotations
+This repository contains notes and resources from two Udemy courses I took on the Rust programming language:
+
+- [Learn to Code with Rust](https://www.udemy.com/course/learn-to-code-with-rust/)
+- [Curso Completo de Rust](https://www.udemy.com/curso-completo-rust/)
+
+The `main.rs` file contains examples on each topic covered in the courses. Additional files can be found in the `src` directory, which include solutions to the exercises provided in the courses.
+
+## Notes
 
 - For installing Rust you may run:
 
