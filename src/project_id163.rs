@@ -1,3 +1,5 @@
+/* This project corresponds to task number 163 @ course https://www.udemy.com/course/learn-to-code-with-rust/ */
+
 /*
 Define a Flight struct with the following fields:
   - an `origin` field (String)

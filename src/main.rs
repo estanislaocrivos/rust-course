@@ -8,12 +8,14 @@ mod project_id117;
 mod project_id127;
 mod project_id140;
 mod project_id163;
+mod project_id221;
 mod project_id78;
 mod project_id96;
 use crate::{
     project_id117::project_id117_solution, project_id127::project_id127_solution,
     project_id140::project_id140_solution, project_id163::project_id163_solution,
-    project_id78::project_id78_solution, project_id96::project_id96_solution,
+    project_id221::project_id221_solution, project_id78::project_id78_solution,
+    project_id96::project_id96_solution,
 };
 
 const THIS_IS_A_CONST: i32 = 5_000_000; // Equivalent to a macro in C (can be local or global, as in this case)
@@ -718,6 +720,46 @@ fn main() {
     } // Using <T> allows to use different types on x and y, may be both floats, both ints or both strings, for example.
 
     let _point = Point { x: 1.0, y: 2.5 };
+
+    /* ========================================================================================== */
+
+    /* Vectors */
+    println!("\nLearning vectors in Rust...");
+
+    /* Vectors are similar to arrays, but just like heap-allocated strings, they have the ability to grow during execution, heap-allocating elements */
+
+    let mut vector_1: Vec<i32> = Vec::new(); // New vector of i32 elements
+    vector_1.push(32);
+
+    let mut vector_2 = vec![1, 2, 4]; // With the vec! macro you avoid having to declare the vector elements's type
+    vector_2.push(5);
+    vector_2.insert(2, 3);
+    let element = vector_2.pop(); // Returns an optional
+    vector_2.remove(0); // Removes element at index 0 & shifts elements. If element did not exist, it panicks
+    println!("vector_2 = {:?}", vector_2);
+    println!("vector_2[0] = {}", vector_2[0]); // You access vector elements just like array elements
+
+    let vector_2_slice = &vector_2[..2];
+
+    /* The program will panick at runtime if we try to access an invalid index position. It cannot detect these kind of operations @ compile time due to Rust not knowing the actual vector size. In this case it is more convenient to use the get() method, which returns an optional */
+
+    let index = 20;
+    let option = vector_2.get(index);
+    match option {
+        Some(element) => println!("The element @ index {index} is: {}", element),
+        None => println!("The element @ index {index} does not exist!"),
+    }
+
+    let mut vector3 = vec![1, 2, 3, 4, 5, 6, 7, 8, 9];
+    let vector3_ref = &mut vector3;
+    vector3_ref.push(10); // Modifying a vector through a mutable reference
+    println!("vector_3 = {:?}", vector3);
+
+    /* ========================================================================================== */
+
+    /* Project ID221 solutions */
+    println!("\nProject ID221 solutions:");
+    project_id221_solution();
 
     /* ========================================================================================== */
 
