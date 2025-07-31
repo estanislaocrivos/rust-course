@@ -8,14 +8,15 @@ mod project_id117;
 mod project_id127;
 mod project_id140;
 mod project_id163;
+mod project_id181;
 mod project_id221;
 mod project_id78;
 mod project_id96;
 use crate::{
     project_id117::project_id117_solution, project_id127::project_id127_solution,
     project_id140::project_id140_solution, project_id163::project_id163_solution,
-    project_id221::project_id221_solution, project_id78::project_id78_solution,
-    project_id96::project_id96_solution,
+    project_id181::project_id181_solution, project_id221::project_id221_solution,
+    project_id78::project_id78_solution, project_id96::project_id96_solution,
 };
 
 const THIS_IS_A_CONST: i32 = 5_000_000; // Equivalent to a macro in C (can be local or global, as in this case)
@@ -631,9 +632,25 @@ fn main() {
         ADMIN,
     }
 
+    /* You can implement methods on enums, just like structs */
+    impl UserRole {
+        fn describe_role(&self) {
+            match self {
+                UserRole::ADMIN => {
+                    println!("ADMIN role: the admin role lets you access everything.")
+                }
+                UserRole::BASIC => {
+                    println!("BASIC role: the basic role lets you only access the surface.")
+                }
+            }
+        }
+    }
+
     enum Website {
-        LINKEDIN(String),
+        LINKEDIN(String), // You can associate a value to an enum using ()
         PERSONAL(String),
+        RANDOM,                   // Not all enums must have a value associated
+        Other { string: String }, // You can also create a struct as another element
     }
 
     struct EnhancedUser {
@@ -668,6 +685,12 @@ fn main() {
     } else {
         println!("The user does not have access!");
     } // Introducing if-else blocks
+
+    /* ========================================================================================== */
+
+    /* Project ID181 solutions */
+    println!("\nProject ID181 solutions:");
+    project_id181_solution();
 
     /* ========================================================================================== */
 
