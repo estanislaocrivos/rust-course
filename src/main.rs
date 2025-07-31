@@ -7,12 +7,13 @@ use rand::random;
 mod project_id117;
 mod project_id127;
 mod project_id140;
+mod project_id163;
 mod project_id78;
 mod project_id96;
 use crate::{
     project_id117::project_id117_solution, project_id127::project_id127_solution,
-    project_id140::project_id140_solution, project_id78::project_id78_solution,
-    project_id96::project_id96_solution,
+    project_id140::project_id140_solution, project_id163::project_id163_solution,
+    project_id78::project_id78_solution, project_id96::project_id96_solution,
 };
 
 const THIS_IS_A_CONST: i32 = 5_000_000; // Equivalent to a macro in C (can be local or global, as in this case)
@@ -594,7 +595,7 @@ fn main() {
         another_user.name, another_user.age
     );
 
-    /* Tuple structs: this kind of structs allow to hold multiple parameters but in a tuple-like style, with no "tags" associated to each element. This allows to implement type-specific tuples, unlike generic tuples */
+    /* Tuple structs: these kind of structs allow to hold multiple parameters but in a tuple-like style, with no "tags" associated to each element. This allows to implement type-specific tuples, unlike generic tuples */
 
     struct ShortDuration(u32, u32); // Hours, minutes
     struct LongDuration(u32, u32); // Years, months
@@ -603,6 +604,20 @@ fn main() {
     println!("some_time, h: {}, m: {}", some_time.0, some_time.1);
 
     // let some_time = (4, 5); // This is a common touple and does not have a specific type, unlike a struct tuple
+
+    /* Unit type structs: these kind of structs allow to hold no members of data, but may have an implementation block associated */
+
+    struct EmptyStruct;
+
+    impl EmptyStruct {
+        fn empty_method() {} // Returns ()
+    }
+
+    /* ========================================================================================== */
+
+    /* Project ID163 solutions */
+    println!("\nProject ID163 solutions:");
+    project_id163_solution();
 
     /* ========================================================================================== */
 
