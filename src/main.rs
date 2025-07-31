@@ -699,6 +699,7 @@ fn main() {
     /* ========================================================================================== */
 
     /* Option enum */
+    println!("\nLearning optional enums in Rust...");
 
     let mut name: Option<String> = None; // Here I'm telling Rust that name is a string but for now it does not hold anything. If I try to print name Rust will not let me. I need to write a string to name and then use a match to operate with it (like a NULL-checking in C)
 
@@ -735,6 +736,13 @@ fn main() {
     if let Some(name_str) = name {
         println!("The name is: {}", name_str);
     }
+
+    /* Result enum */
+
+    /* The result enum can be used to express success or error, as these are its two possible values. Rust does not have exceptions but the result enum helps to serve the same purpose. When a function is set to return a Result enum, the compiler forces to handle both cases (ok and err). Result is of type Result<T,E>, where T is the parameter it returns in the Ok case and E is the parameter it returns in the Err case, which can be of the same or of different type. For example, on success you may return an integer and on error you may return a string. */
+
+    let ok: Result<i32, &str> = Result::Ok(10);
+    let error: Result<i32, &str> = Result::Err("Error");
 
     /* ========================================================================================== */
 
