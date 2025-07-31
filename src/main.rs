@@ -12,12 +12,6 @@ mod project_id181;
 mod project_id221;
 mod project_id78;
 mod project_id96;
-use crate::{
-    project_id117::project_id117_solution, project_id127::project_id127_solution,
-    project_id140::project_id140_solution, project_id163::project_id163_solution,
-    project_id181::project_id181_solution, project_id221::project_id221_solution,
-    project_id78::project_id78_solution, project_id96::project_id96_solution,
-};
 
 const THIS_IS_A_CONST: i32 = 5_000_000; // Equivalent to a macro in C (can be local or global, as in this case)
 
@@ -161,7 +155,7 @@ fn main() {
 
     /* Project ID78 solutions */
     println!("\nProject ID78 solutions:");
-    project_id78_solution();
+    project_id78::project_id78_solution();
 
     /* ========================================================================================== */
 
@@ -212,7 +206,7 @@ fn main() {
 
     /* Project ID96 */
     println!("\nProject ID96 solutions:");
-    project_id96_solution();
+    project_id96::project_id96_solution();
 
     /* ========================================================================================== */
 
@@ -349,13 +343,13 @@ fn main() {
 
     /* Project ID117 solutions */
     println!("\nProject ID117 solutions:");
-    project_id117_solution();
+    project_id117::project_id117_solution();
 
     /* ========================================================================================== */
 
     /* Project ID127 solutions */
     println!("\nProject ID127 solutions:");
-    project_id127_solution();
+    project_id127::project_id127_solution();
 
     /* ========================================================================================== */
 
@@ -402,7 +396,7 @@ fn main() {
 
     /* Project ID140 solutions */
     println!("\nProject ID140 solutions:");
-    project_id140_solution();
+    project_id140::project_id140_solution();
 
     /* ========================================================================================== */
 
@@ -620,7 +614,7 @@ fn main() {
 
     /* Project ID163 solutions */
     println!("\nProject ID163 solutions:");
-    project_id163_solution();
+    project_id163::project_id163_solution();
 
     /* ========================================================================================== */
 
@@ -686,11 +680,21 @@ fn main() {
         println!("The user does not have access!");
     } // Introducing if-else blocks
 
+    let user = UserRole::BASIC;
+    if let UserRole::ADMIN = user {
+        // Handle this particular case. This avoids having to match all cases with match{}
+    }
+
+    let web = Website::LINKEDIN("linkedin.com".to_string());
+    if let Website::LINKEDIN(website) = web {
+        // Handle this particular case. This avoids having to match all cases with match{}
+    }
+
     /* ========================================================================================== */
 
     /* Project ID181 solutions */
     println!("\nProject ID181 solutions:");
-    project_id181_solution();
+    project_id181::project_id181_solution();
 
     /* ========================================================================================== */
 
@@ -782,7 +786,7 @@ fn main() {
 
     /* Project ID221 solutions */
     println!("\nProject ID221 solutions:");
-    project_id221_solution();
+    project_id221::project_id221_solution();
 
     /* ========================================================================================== */
 
