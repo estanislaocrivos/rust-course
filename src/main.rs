@@ -15,6 +15,7 @@ mod project_id127;
 mod project_id140;
 mod project_id163;
 mod project_id181;
+mod project_id192;
 mod project_id210;
 mod project_id221;
 mod project_id78;
@@ -170,6 +171,12 @@ fn main() {
     /* Closures */
     println!("\nLearning closures in Rust...");
     closures::closures_in_rust();
+
+    /* ========================================================================================== */
+
+    /* Project ID192 solutions */
+    println!("\nProject ID192 solutions:");
+    project_id192::project_id192_solution();
 
     /* ========================================================================================== */
 }
