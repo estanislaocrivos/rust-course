@@ -5,7 +5,7 @@ pub fn options_in_rust() {
 
     let mut name: Option<String> = None; // Here I'm telling Rust that name may hold a String, but for now it holds None
 
-    println!("name: {:?}", name); // Optionals do not implement the display trait, although they implement the debug trait
+    println!("Name is {:?}", name); // Optionals do not implement the display trait, although they implement the debug trait
 
     // To unwrap the optional I need to use some kind of match structure, like match{}:
     match name {
@@ -14,7 +14,6 @@ pub fn options_in_rust() {
     }
 
     name = Some("John".to_string()); // You use Some() to assign a value to an optional
-
     match name {
         Some(name) => println!("Name is {}", name),
         None => println!("Name is None!"),
@@ -48,6 +47,27 @@ pub fn options_in_rust() {
     let ok: Result<(u8, u8), &str> = Result::Ok((1, 2)); // You may return a tuple, or eventually a struct, on any of the two options
     let error: Result<i32, &str> = Result::Err("Error");
 
+    /* Result enums are usually used as function return values */
+    fn divide(a: f64, b: f64) -> Result<f64, String> {
+        if b == 0.0 {
+            return Err("Cannot perform division...".to_string());
+        }
+        return Ok(a / b);
+    }
+    let optional = divide(10.0, 0.0);
+    match optional {
+        Ok(result) => println!("The result of the division is {result}"),
+        Err(string) => println!("{string}"),
+    }
+    let optional = divide(10.0, 2.0);
+    match optional {
+        Ok(result) => println!("The result of the division is {result}"),
+        Err(string) => println!("{string}"),
+    }
+
+    let optional = divide(10.0, 2.0);
+    println!("Was the division successful? {}", optional.is_ok()); // You can use different methods for unwrapping the optional
+
     /* Let-else blocks allow to handle one of the cases on an optional and forces to panic or end execution given the condition. For example, we can say "if this optional is None, then panic, else continue execution" */
 
     let optional: Option<u8> = Some(10);
@@ -57,4 +77,11 @@ pub fn options_in_rust() {
         panic!("Panicking!");
     };
     println!("The number is {}", number); // If not none, you can use number here
+
+    /* The while-let construct allows to iterate over an iterable while checking if the element is Some or None */
+    let mut sauces = vec!["Mayonaise", "Ketchup", "Ranch"];
+    while let Some(sauce) = sauces.pop() {
+        // This while loop iterates the vector until it finds None
+        println!("The sauce is {}", sauce);
+    }
 }

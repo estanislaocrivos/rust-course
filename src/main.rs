@@ -15,6 +15,7 @@ mod project_id127;
 mod project_id140;
 mod project_id163;
 mod project_id181;
+mod project_id210;
 mod project_id221;
 mod project_id78;
 mod project_id96;
@@ -127,6 +128,12 @@ fn main() {
     /* Option enum */
     println!("\nLearning optional enums in Rust...");
     options::options_in_rust();
+
+    /* ========================================================================================== */
+
+    /* Project ID210 solutions */
+    println!("\nProject ID210 solutions:");
+    project_id210::project_id210_solution();
 
     /* ========================================================================================== */
 
