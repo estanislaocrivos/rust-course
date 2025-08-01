@@ -8,6 +8,7 @@ mod enums;
 mod functions;
 mod generics;
 mod iterators;
+mod lifetimes;
 mod options;
 mod ownership;
 mod project_id117;
@@ -18,6 +19,7 @@ mod project_id181;
 mod project_id192;
 mod project_id210;
 mod project_id221;
+mod project_id344;
 mod project_id78;
 mod project_id96;
 mod slices;
@@ -177,6 +179,31 @@ fn main() {
     /* Project ID192 solutions */
     println!("\nProject ID192 solutions:");
     project_id192::project_id192_solution();
+
+    /* ========================================================================================== */
+
+    /* Lifetimes */
+    println!("\nLearning lifetimes in Rust...");
+    lifetimes::lifetimes_in_rust();
+
+    /* ========================================================================================== */
+
+    /* Project ID344 solutions */
+    println!("\nProject ID344 solutions:");
+    project_id344::project_id344_solution();
+
+    /* ========================================================================================== */
+
+    /*
+    These course sections were not covered (considered not necessary for now):
+
+    - S15: Strings (part II)
+    - S16: Hashmaps
+    - S23: Random crate
+    - S24: Chrono crate
+    - S25: Regex crate
+    - S26: Smart pointers
+     */
 
     /* ========================================================================================== */
 }
