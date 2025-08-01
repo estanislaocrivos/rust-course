@@ -9,7 +9,7 @@ pub fn traits_in_rust() {
         fn say_hello(&self) -> String;
     }
 
-    /* Then you can implement the interface for each new "class" */
+    /* Then you can implement the interface for different objects */
 
     impl Talk for Human {
         fn say_hello(&self) -> String {

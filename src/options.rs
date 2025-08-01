@@ -1,22 +1,26 @@
 // src/options.rs
 
 pub fn options_in_rust() {
-    let mut name: Option<String> = None; // Here I'm telling Rust that name is a string but for now it does not hold anything. If I try to print name Rust will not let me. I need to write a string to name and then use a match to operate with it (like a NULL-checking in C)
+    /* Options or optionals in Rust let you define a variable wich may or may not hold a value. These variables can hold a value of the type specified, or they may hold None. The user must unwrap the Optional using a certain control structure, such as a match{} */
 
+    let mut name: Option<String> = None; // Here I'm telling Rust that name may hold a String, but for now it holds None
+
+    println!("name: {:?}", name); // Optionals do not implement the display trait, although they implement the debug trait
+
+    // To unwrap the optional I need to use some kind of match structure, like match{}:
     match name {
-        Some(name) => println!("Name is {}", name),
+        Some(name) => println!("Name is {}", name), // Here I can use the variable normally
         None => println!("Name is None!"),
-    } // Here you can check if name is None or not and then if not, you can use it normally.
+    }
 
-    name = Some("John".to_string()); // You use Some() to assign a value to a Option<> variable. Else you can assign None.
+    name = Some("John".to_string()); // You use Some() to assign a value to an optional
 
     match name {
         Some(name) => println!("Name is {}", name),
         None => println!("Name is None!"),
     }
 
-    /* You use Option<type> (you can read it as optional type) to indicate that a variable may or may not have a value, so it may be null. A typical use of this type is when the user asked to input a string, for example, which may be empty. It can optionally be a string or be None. */
-
+    /* A typical use of this type is when the user asked to input a string, for example, which may be empty. It can optionally be a string or be None. */
     fn get_name(name_or_none: bool) -> Option<String> {
         if name_or_none {
             return Some("John".to_string());
@@ -24,14 +28,13 @@ pub fn options_in_rust() {
             return None;
         }
     }
-
     let name = get_name(true);
     match name {
         Some(name) => println!("Getting name: {}", name),
-        None => (),
+        None => println!("No name!"),
     }
 
-    /* Another way of checking for a value in an Optional. This is a more "verbose" or understandable way to check for a value */
+    /* The if-let structure offers another way of checking for a value in an Optional. This control flow allows the execution of a dedicated block in case the optional holds a value or holds None */
     let name: Option<String> = Some("John".to_string());
     if let Some(name_str) = name {
         println!("The name is: {}", name_str);
@@ -39,29 +42,19 @@ pub fn options_in_rust() {
 
     /* Result enum */
 
-    /* The result enum can be used to express success or error, as these are its two possible values. Rust does not have exceptions but the result enum helps to serve the same purpose. When a function is set to return a Result enum, the compiler forces to handle both cases (ok and err). Result is of type Result<T,E>, where T is the parameter it returns in the Ok case and E is the parameter it returns in the Err case, which can be of the same or of different type. For example, on success you may return an integer and on error you may return a string. */
+    /* The result enum is implemented by Rust, and can be used to express success (Ok) or error (Err). When a function is set to return a Result enum, the compiler forces to handle both cases. Result is of type Result<T,E>, where T is the parameter/s it returns in the Ok case and E is the parameter/s it returns in the Err case, which can be of the same or of different type. For example, on success you may return an integer and on error you may return a string. */
 
     let ok: Result<i32, &str> = Result::Ok(10);
+    let ok: Result<(u8, u8), &str> = Result::Ok((1, 2)); // You may return a tuple, or eventually a struct, on any of the two options
     let error: Result<i32, &str> = Result::Err("Error");
 
-    /* Let-else block */
+    /* Let-else blocks allow to handle one of the cases on an optional and forces to panic or end execution given the condition. For example, we can say "if this optional is None, then panic, else continue execution" */
 
-    let some_var: Option<u8> = Some(10);
+    let optional: Option<u8> = Some(10);
 
-    /* To "decode" an optional, you may use the already-known match{} structure: */
-    match some_var {
-        Some(number) => println!("some_var = {}", number),
-        None => println!("some_var = None"),
-    }
-
-    /* Using match{} forces the user to include all the logic for handling the number inside the match structure. If you want to use the number outside the match scope you cannot. Another way of "matching" which allows the user to use the variable later in the code is:  */
-
-    let Some(number) = some_var else {
+    let Some(number) = optional else {
         /* Here you MUST diverge (panic or return) */
         panic!("Panicking!");
     };
-
-    /* This allows you to use the number here... */
-
-    println!("The number is {}", number);
+    println!("The number is {}", number); // If not none, you can use number here
 }

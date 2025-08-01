@@ -10,7 +10,7 @@ pub fn closures_in_rust() {
 
     println!("The sum of 2 + 5 is {}", sum_fn(2, 5));
 
-    /* Closures are what lambdas in other languages. These are functions which are anon. (do not have a certain name), can only contain a single expression, and are usually defined inline (single line expression)   */
+    /* Closures are what lambdas in other languages. These are functions which are anon. (do not have a name tag), can only contain a single expression, and are usually defined inline (single line expression)   */
 
     let sum = |num1: i32, num2: i32| -> i32 { num1 + num2 };
 
