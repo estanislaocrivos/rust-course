@@ -54,3 +54,23 @@ cargo add crate-name
 ```
 
 You can find available crates on [crates.io](https://crates.io).
+
+- For creating and running tests, you can use the `test` macro:
+
+```rust
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_example() {
+        assert_eq!(2 + 2, 4);
+    }
+}
+```
+
+In Rust it is a common convention to place unit tests in the same file as the source code under test, but separated in a module as shown above. For running the tests, you can use the following command:
+
+```bash
+cargo test
+```
