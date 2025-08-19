@@ -25,6 +25,7 @@ mod project_id96;
 mod slices;
 mod strings;
 mod structs;
+mod testing;
 mod traits;
 mod variables;
 mod vectors;
@@ -194,6 +195,12 @@ fn main() {
 
     /* ========================================================================================== */
 
+    // /* Project ID344 solutions */
+    // println!("\nProject ID344 solutions:");
+    // project_id344::project_id344_solution();
+
+    /* ========================================================================================== */
+
     /*
     These course sections were not covered (considered not necessary for now):
 
@@ -206,26 +213,6 @@ fn main() {
      */
 
     /* ========================================================================================== */
-}
-
-/* ========================================================================================== */
-
-fn testable_function(x: u8) -> u8 {
-    return x;
-}
-
-/* ========================================================================================== */
-
-#[cfg(test)]
-mod test {
-    use crate::testable_function;
-
-    #[test]
-    fn testable_function_test() {
-        assert_eq!(testable_function(1), 1);
-        assert_eq!(testable_function(2), 2);
-        assert_eq!(testable_function(3), 3);
-    }
 }
 
 /* ========================================================================================== */
