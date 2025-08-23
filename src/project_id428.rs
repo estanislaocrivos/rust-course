@@ -1,3 +1,4 @@
+use rstest::{fixture, rstest};
 use std::collections::HashSet;
 
 /* This project corresponds to task number 428 @ course https://www.udemy.com/course/learn-to-code-with-rust/ */
@@ -144,40 +145,88 @@ impl Salad {
 mod tests {
     use super::*;
 
-    fn helper_constructor() -> Salad {
+    #[fixture]
+    fn normal_salad() -> Salad {
         return Salad::new(
             Protein::CrispyChicken,
             vec![Vegetable::Tomato, Vegetable::Cucumber],
             Dressing::Italian,
-        ); // Tot. calories = 565
+        );
     }
 
-    #[test]
-    fn test_constructor() {
-        let salad = helper_constructor();
-        assert_eq!(salad.protein, Protein::CrispyChicken);
+    #[fixture]
+    fn salad_with_565_calories() -> Salad {
+        return Salad::new(
+            Protein::CrispyChicken,
+            vec![Vegetable::Tomato, Vegetable::Cucumber],
+            Dressing::Italian,
+        );
+    }
+
+    #[fixture]
+    fn salad_with_vegetables() -> Salad {
+        return Salad::new(
+            Protein::CrispyChicken,
+            vec![Vegetable::Tomato],
+            Dressing::Italian,
+        );
+    }
+
+    #[fixture]
+    fn salad_with_no_vegetables() -> Salad {
+        return Salad::new(Protein::CrispyChicken, vec![], Dressing::Italian);
+    }
+
+    #[fixture]
+    fn salad_with_no_repeated_vegetables() -> Salad {
+        return Salad::new(
+            Protein::CrispyChicken,
+            vec![Vegetable::Tomato, Vegetable::Cucumber],
+            Dressing::Italian,
+        );
+    }
+
+    #[fixture]
+    fn salad_with_repeated_vegetables() -> Salad {
+        return Salad::new(
+            Protein::CrispyChicken,
+            vec![Vegetable::Tomato, Vegetable::Tomato],
+            Dressing::Italian,
+        );
+    }
+
+    #[rstest]
+    fn test_constructor(normal_salad: Salad) {
+        assert_eq!(normal_salad.protein, Protein::CrispyChicken);
         assert_eq!(
-            salad.vegetables,
+            normal_salad.vegetables,
             vec![Vegetable::Tomato, Vegetable::Cucumber]
         );
-        assert_eq!(salad.dressing, Dressing::Italian);
+        assert_eq!(normal_salad.dressing, Dressing::Italian);
     }
 
-    #[test]
-    fn test_is_valid() {
-        let salad = helper_constructor();
-        assert_eq!(salad.is_valid(), true);
+    #[rstest]
+    fn test_is_valid(salad_with_vegetables: Salad) {
+        assert_eq!(salad_with_vegetables.is_valid(), true);
     }
 
-    #[test]
-    fn test_calories() {
-        let salad = helper_constructor();
-        assert_eq!(salad.calories(), 565);
+    #[rstest]
+    fn test_calories(salad_with_565_calories: Salad) {
+        assert_eq!(salad_with_565_calories.calories(), 565);
     }
 
-    #[test]
-    fn test_has_duplicate_vegetables() {
-        let salad = helper_constructor();
-        assert_eq!(salad.has_duplicate_vegetables(), false);
+    #[rstest]
+    fn test_has_duplicate_vegetables(
+        salad_with_repeated_vegetables: Salad,
+        salad_with_no_repeated_vegetables: Salad,
+    ) {
+        assert_eq!(
+            salad_with_no_repeated_vegetables.has_duplicate_vegetables(),
+            false
+        );
+        assert_eq!(
+            salad_with_repeated_vegetables.has_duplicate_vegetables(),
+            true
+        );
     }
 }
