@@ -6,3 +6,7 @@ edition = "2021"
 [dependencies]
 rand = "0.9.1"
 random = "0.14.0"
+
+[dev-dependencies]
+pretty_assertions = "1.4.1"
+rstest = "0.26.1"

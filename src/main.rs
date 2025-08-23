@@ -20,11 +20,13 @@ mod project_id192;
 mod project_id210;
 mod project_id221;
 mod project_id344;
+mod project_id428;
 mod project_id78;
 mod project_id96;
 mod slices;
 mod strings;
 mod structs;
+mod testing;
 mod traits;
 mod variables;
 mod vectors;
@@ -194,38 +196,20 @@ fn main() {
 
     /* ========================================================================================== */
 
-    /*
-    These course sections were not covered (considered not necessary for now):
-
-    - S15: Strings (part II)
-    - S16: Hashmaps
-    - S23: Random crate
-    - S24: Chrono crate
-    - S25: Regex crate
-    - S26: Smart pointers
-     */
+    /* Project ID428 solutions */
+    println!("\nProject ID428 solutions: run 'cargo test project_id428'");
 
     /* ========================================================================================== */
-}
 
-/* ========================================================================================== */
+    // These course sections were not yet covered:
+    // - S15: Strings (part II)
+    // - S16: Hashmaps
+    // - S23: Random crate
+    // - S24: Chrono crate
+    // - S25: Regex crate
+    // - S26: Smart pointers
 
-fn testable_function(x: u8) -> u8 {
-    return x;
-}
-
-/* ========================================================================================== */
-
-#[cfg(test)]
-mod test {
-    use crate::testable_function;
-
-    #[test]
-    fn testable_function_test() {
-        assert_eq!(testable_function(1), 1);
-        assert_eq!(testable_function(2), 2);
-        assert_eq!(testable_function(3), 3);
-    }
+    /* ========================================================================================== */
 }
 
 /* ========================================================================================== */
