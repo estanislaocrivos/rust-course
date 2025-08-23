@@ -1,4 +1,3 @@
-use rstest::{fixture, rstest};
 use std::collections::HashSet;
 
 /* This project corresponds to task number 428 @ course https://www.udemy.com/course/learn-to-code-with-rust/ */
@@ -144,6 +143,7 @@ impl Salad {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use rstest::{fixture, rstest};
 
     #[fixture]
     fn normal_salad() -> Salad {
