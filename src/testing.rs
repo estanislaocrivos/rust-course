@@ -4,6 +4,10 @@ fn testable_function(x: u8) -> u8 {
     return x;
 }
 
+/// # This is a function
+/// ```
+/// assert_eq!(true);
+/// ```
 fn is_it_true(x: u8) -> bool {
     if x > 0 {
         return true;
@@ -76,5 +80,11 @@ mod test {
         } else {
             return Err(20);
         }
+    }
+
+    #[test]
+    #[ignore] // This will tell Rust to ignore this test
+    fn test_to_be_ignored() {
+        assert!(true);
     }
 }

@@ -69,8 +69,26 @@ mod tests {
 }
 ```
 
-In Rust it is a common convention to place unit tests in the same file as the source code under test, but separated in a module as shown above. For running the tests, you can use the following command:
+In Rust it is a common convention to place unit tests in the same file as the source code under test, but separated in a module as shown above. For running all the tests in the present project, you can use the following command:
 
 ```bash
 cargo test
+```
+
+You may specify the test name to run a specific test:
+
+```bash
+cargo test <test-name>
+```
+
+The test name may also be a word which matches the test/s name partially. You may also want to run the tests inside a specific file:
+
+```bash
+cargo test <test-file-name>
+```
+
+You can also tell Rust to show the tests output on the terminal by running:
+
+```bash
+cargo test -- --show-output
 ```
