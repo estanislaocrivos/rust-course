@@ -196,22 +196,18 @@ fn main() {
 
     /* ========================================================================================== */
 
-    // /* Project ID344 solutions */
-    // println!("\nProject ID344 solutions:");
-    // project_id344::project_id344_solution();
+    /* Project ID428 solutions */
+    println!("\nProject ID428 solutions: run 'cargo test project_id428'");
 
     /* ========================================================================================== */
 
-    /*
-    These course sections were not covered (considered not necessary for now):
-
-    - S15: Strings (part II)
-    - S16: Hashmaps
-    - S23: Random crate
-    - S24: Chrono crate
-    - S25: Regex crate
-    - S26: Smart pointers
-     */
+    // These course sections were not yet covered:
+    // - S15: Strings (part II)
+    // - S16: Hashmaps
+    // - S23: Random crate
+    // - S24: Chrono crate
+    // - S25: Regex crate
+    // - S26: Smart pointers
 
     /* ========================================================================================== */
 }
